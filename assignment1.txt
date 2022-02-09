@@ -1,0 +1,52 @@
+Assignment no 1 (27/01/2022)
+1.AREA OF TRIANGLE-
+---------------------
+STEP1- Read the 2 inputs b and h
+STEP2- Caluclate the area of triangle
+                 Area of triangle = 1/2(b*h)
+STEP3- Print the area of triangle
+STEP4- Stop
+
+3. PSEUDO CODE FOR BASIC ARITHMETIC OPERATIONS-
+-----------------------------------------------
+Read a,b
+Sum = a+b
+sub = a-b
+Mul = a*b
+Div = a/b
+
+
+6. SIMPLE INTEREST
+------------------
+STEP1-Read the 3 input P,R,T
+STEP2-Calculate the simple interest
+            SI=P*R*T/100
+STEP3-Print the SI
+STEP4-Stop
+
+7. LARGEST THREE NUMBERS
+------------------------
+STEP1-Read the input a,b,c
+Step2-if(a>b):
+          largest=a
+      else:
+           largest=b
+step3-if(largest<c)
+step4-largest=c
+step5-Print largest
+step6-End
+
+8. PRIME NO
+-----------
+Step 1-Start
+Step 2-Read number n
+Step 3-Set K=0
+Step 4-For i=2 to n-1
+Step 5-If n mod 1=0 then
+Step 6-Set K=1 and break
+Step 7-Loop
+Step 8-If K=0 then
+      The given number is prime
+else
+      The given number is not prime
+Step 9-Stop

@@ -1,0 +1,299 @@
+Assignment 5 -2/2/2022-
+---------
+1.Write Java programs to create an array an initialize and print the elements.
+
+package com.ia.atcs;
+
+public class Array {
+public static void main(String[] args) {
+	
+	int num[]= {1,2,3,4};
+    for(int i=0;i<4;i++) {
+    	System.out.println(num[i]);
+    }
+	}
+}
+
+2.Calculate the average of numbers using Array.
+
+package com.ia.atcs;
+
+public class Average {
+public static void main(String[] args) {
+	
+	int[] arr= {1,2,3,4};
+	int sum=0;
+	float avg;
+	for(int i=0;i<4;i++) {
+		
+		 sum=sum+arr[i];
+		
+	}
+	System.out.println(sum);
+	avg=sum/4;
+	System.out.println(avg);
+}
+}
+
+3.Print the array elements using for each loop.
+
+package com.ia.atcs;
+
+public class EachLoop {
+	public static void main(String[] args) {
+		int x[]= {10,20,30,40};
+		for(int j:x) {
+			System.out.println(j);
+		}
+	}
+
+}
+
+4.Convert char Array to String.
+
+package com.ia.atcs;
+
+public class ArrayString {
+	public static void main(String[] args) {
+		char arr[]= {'a','n','m','o','l'};
+		String s=String.valueOf(arr);
+		System.out.println(s);
+		
+		
+	}
+
+}
+
+5.Add two Matrix using Multi-dimensional Arrays.
+
+package com.ia.atcs;
+
+public class SumOfMatrix {
+public static void main(String[] args) {
+                 int a[][]= {{1,2,3},{4,5,6},{7,8,9}};
+                 int b[][]= {{2,3,4},{5,6,4},{8,9,7}};
+                 int s[][]=new int[3][3];
+                 for(int i=0;i<3;i++) {
+                	 for(int j=0;j<3;j++) {
+                		 s[i][j]=a[i][j]+b[i][j];
+                		 System.out.print(s[i][j]+" ");
+                	 }
+                	 System.out.println();
+                 }
+}
+}
+
+6.Write a java program to get the class name of array in java.
+
+package com.ia.atcs;
+
+public class NameArray {
+public static void main(String[] args) {
+	int arr[]= {45,23,56};
+	
+	System.out.println(arr.getClass().getName());
+}
+}
+
+7.Find out the min numbers in an array.
+
+package com.ia.atcs;
+
+public class MinNum {
+static void min(int arr[]) {
+		
+		int min=arr[0];
+		
+		for(int i=1;i<arr.length;i++) {
+			
+			if(min>arr[i])
+				min=arr[i];
+		}
+		System.out.println(min);
+	}
+	public static void main(String[] args) {
+		
+		
+		int a[]= {1,2,3,4,5};
+		
+		min(a);
+		
+		
+	}
+
+}
+
+8.Create a student class using student properties and create and execute a method without a constructor.
+
+package com.ia.atcs;
+
+public class Student {
+	int stid;
+	String stname;
+	 void assign() {
+		 stid=100;
+		 stname="Anmol";
+		 
+	 }
+	void display() {
+		System.out.println(stid+" "+stname);
+	}
+	public static void main(String[] args) {
+		Student st=new Student();
+		st.assign();
+		st.display();
+	}
+ 
+}
+
+9.Create a Product class with constructor (observe the difference with or without constructor)
+
+package com.ia.atcs;
+
+public class Product {
+	
+		int a,b;
+		
+		 public Product(){
+			 a=100;
+			 b=2;
+			 
+		 }
+		void display() {
+			System.out.println(a*b);
+		}
+		public static void main(String[] args) {
+			Product st=new Product();
+			
+			st.display();
+		}
+	 
+	}
+
+10.Create a Student class without parameters and with parameters by using constructor.
+
+int stid;
+	String stname;
+	 public Student() {
+		 stid=100;
+		 stname="ABC";
+		 
+	 }
+	 
+	 public Student(int x, String y)
+	 {
+		 stid=x;
+		 stname=y;
+	 }
+	void display() {
+		System.out.println(stid+" "+stname);
+	}
+	public static void main(String[] args) {
+		Student st1=new Student();
+		
+		st1.display();
+		Student st2=new Student(500,"Anmol");
+		st2.display();
+	}
+
+11.Create a Calculator class and create static methods with or without return type.
+
+package com.ia.atcs;
+
+public class Calculator {
+	public static int SumOfTwoNumbers(int a,int b) {
+		return a+b;
+	}
+public static void main(String[] args) {
+     
+	int c=Calculator.SumOfTwoNumbers(90,10);
+	System.out.println(c);
+}
+}
+
+package com.ia.atcs;
+
+public class Calculator {
+	public static void SumOfTwoNumbers(int a,int b) {
+		System.out.println(a+b);
+	}
+public static void main(String[] args) {
+     
+	Calculator.SumOfTwoNumbers(90,10);
+	
+}
+}
+
+12.Create a Calculator class and create instance methods with or without return type.
+
+package com.atcs.arrays;
+
+public class Calculator {
+	
+	public int add(int x, int y)
+	{
+		return x+y;
+		}
+
+	public void div(float x, float y)
+	{
+		System.out.println(x/y);
+	}
+	
+	public int mul(int x, int y)
+	{
+		return x*y;
+	}
+	
+	public void sub(int x, int y)
+	{
+		System.out.println(x-y);
+	}
+	
+	public static void main(String[] args) {
+		
+		Calculator c1 = new Calculator();
+		Calculator c2 = new Calculator();
+		int a = c1.add(5,5);
+		System.out.println(a);
+		c2.div(99.0f, 22.7f);
+		int b = c1.mul(2,5);
+		System.out.println(b);
+		c2.sub(10,0);
+		
+
+	}
+
+}
+
+13.Create class Test print all the methods of String.
+
+package com.ia.atcs;
+
+public class Test {
+public static void main(String[] args) {
+	String name="Jaipur";
+	String s1=name.concat(" UP");
+	String s2=s1.toUpperCase();
+	System.out.println(s1);
+	System.out.println(s2);
+}
+}
+
+
+14.Create a class Add add two numbers by using Wrapper class.
+
+package com.ia.atcs;
+
+public class add {
+	public static void main(String[] args) {
+		
+		int x =Integer.parseInt(args[0]);
+		int y =Integer.parseInt(args[1]);
+		int z = x + y;
+		System.out.println(z);
+		
+	}
+}
+
+

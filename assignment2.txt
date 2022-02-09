@@ -1,0 +1,72 @@
+28/01/2022-Assignment no 2(linux)
+1. Create a folder and insert three files.
+mkdir anmol
+cd anmol
+touch anmol.txt{1..3}
+
+2. ls: command list out all the files which you added(use man command use 3 or 4 commands)
+ls -A
+ls -I
+ls -m
+
+3.mkdir==>to create new directory
+mkdir anmol
+
+4.  cd==>change directory
+cd anmol
+
+ 5. touch==>to create an empty file
+touch 123
+
+ 6. rmdir-->to remove directory
+cd ..
+rmdir anmol
+
+ 7. rm=> to remove a file
+cd anmol
+rm 123.txt
+ 8. cal==> current month calendar
+cal
+
+ 9. date==>to display current date and time.
+date
+
+ 10.  help--> to display list of commands
+help
+
+ 11. hello-->to display brief system information
+hello
+
+12.   clear-->to clear the screen
+clear
+
+13.  exit-->to close the current session. 
+exit
+
+
+
+15. ls: lists all the contents of the specified directory.It can be used to obtain information on the files and directories within it.
+ls -l anmol
+
+16.cd: used to change from one directory to another
+cd anmol
+
+17.pwd: prints name of the current working directory.
+pwd
+
+18.cp: copy files or directories and is used to make copies of the new files and directories.
+cd anmol
+cp 234.txt 567.txt
+cat 234.txt
+cat 567.txt
+
+19.mv: move or rename files or directories.It is used to change the name of files or directories,or to move them into other directories. 
+cd anmol
+mv 123.txt abc_atcs
+
+Q20. rmdir: remove files or directories. rmdir removes named empty directories.
+
+cd anmol
+cd abc_atcs
+rm 567.txt
+

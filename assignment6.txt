@@ -1,0 +1,252 @@
+ASSIGNMENT NO.6-3/3/2022
+------------------------
+1.Print default values of static & instance variables for different data types.
+package com.ia.atcs2;
+public class Values {
+	static int a;
+	char c;
+	float f;
+	static long l;
+	
+	
+public static void main(String[] args) {
+	       System.out.println(a);
+	       Values t=new Values();
+	       System.out.println(t.c);
+	       System.out.println(t.f);
+	       System.out.println(l);
+	       
+		
+}
+}
+
+2.Build a class Employee which contains details about the employee and compile and run its instance.
+
+package com.ia.atcs2;
+
+public class Employee {
+	int id;
+	String name;
+	
+public Employee() {
+	id = 100;
+	name = "Anmol";
+}
+	
+//	void display() {
+//		
+//		System.out.println(id+" "+name);
+//	}
+	
+	public static void main(String[] args) {
+		Employee e=new Employee();
+		
+		System.out.println(e.id + " "+e.name);
+	}
+
+}
+
+3.Build a class that has references to other classes. Instantiate these reference variables and invoke instance methods.
+
+package com.ia.atcs2;
+
+public class Other {
+public static void main(String[] args) {
+		
+		Vehicle v1 = new Vehicle();
+		v1.setBrand("M-Benz");
+		v1.setYoM(1999);
+		v1.getBrand();
+		System.out.println(v1.getBrand());
+		v1.getYoM();
+		System.out.println(v1.getYoM());
+	
+		
+	}
+
+
+}
+class Vehicle
+{
+	String Brand;
+	int YoM;
+	public String getBrand() {
+		return Brand;
+	}
+	public void setBrand(String brand) {
+		Brand = brand;
+	}
+	public int getYoM() {
+		return YoM;
+	}
+	public void setYoM(int yoM) {
+		YoM = yoM;
+	}
+	
+	
+}
+
+
+4.Create Student class with global variables and related methods with constructor and without constructor observe the difference between methods calling and constructor calling.
+
+without constructor--
+package com.ia.atcs2;
+
+public class Student {
+	int stid;
+	String name;
+	void assign() {
+		stid = 100;
+		name = "Anmol";
+	}
+	void display() {
+		System.out.println(stid+" "+name);
+	}
+	
+	public static void main(String[] args) {
+		Student st=new Student();
+		st.assign();
+		st.display();
+	}
+}
+
+with constructor--
+package com.ia.atcs2;
+
+public class Student {
+	int stid;
+	String name;
+	public Student() {//Create construcor
+		stid = 100;
+		name = "Anmol";
+	}
+	void display() {
+		System.out.println(stid+" "+name);
+	}
+	
+	public static void main(String[] args) {
+		Student st=new Student();
+		
+		st.display();
+	}
+}
+
+5. Create a class Vehicle and encapsulate the data members.
+
+package com.ia.atcs2;
+
+public class Vechicle {
+	private String Name; 
+	private String color;
+	
+	
+	public String getName() {
+	return Name;
+}
+	public void setName(String Name) {
+		this.Name = Name;
+	}
+	public String getcolor() {
+		return color;
+	}
+	public void setcolor(String color) {
+		this.color = color;
+		}
+
+public static void main(String[] args) {
+	Vechicle v=new Vechicle();
+	v.setName("BMW");
+	System.out.println(v.getName());
+	v.setcolor("Red");
+	System.out.println(v.getcolor());
+	
+}	
+}
+
+6.Create demo applications to illustrate different types of inheritance.
+SINGLE INHERITANCE-
+package com.ia.atcs2;
+class Test{
+	
+	void sound() {
+		System.out.println("Good");
+	}
+	static void Performance() {
+		System.out.println("10yrs");
+	}
+}
+public class Inheritance extends Test {
+	void design() {
+		System.out.println("Bad");
+	}
+	public static void main(String[] args) {
+		Inheritance i=new Inheritance();
+		i.sound();
+		Test.Performance();
+		i.design();
+	}
+
+}
+
+MULTILEVEL INHERITANCE-
+package com.ia.atcs2;
+class Test{
+	
+	void sound() {
+		System.out.println("Good");
+	}
+	void Performance() {
+		System.out.println("10yrs");
+	}
+}
+class Car extends Test{
+	void speed() {
+		System.out.println("200 rpm");
+	}
+	
+}
+public class Inheritance extends Car {
+	void design() {
+		System.out.println("Bad");
+	}
+	public static void main(String[] args) {
+		Inheritance i=new Inheritance();
+		i.sound();
+		i.design();
+		i.Performance();
+		i.speed();
+	}
+
+}
+
+
+
+
+
+
+
+7.Create one Animal class(superclass), Dog class(subclass) the same method in the subclass override the method in the superclass.
+
+package com.ia.atcs2;
+class Animal{
+	public void dogBreed()
+	{
+		System.out.println("Pug");
+	}
+}
+
+public class OverRiding extends Animal{
+	public void dogBreed()
+	{	
+		System.out.println("German Shepherd");
+	}
+
+	public static void main(String[] args) {
+		
+			
+		OverRiding a1 =  new OverRiding();
+		a1.dogBreed();
+	}
+
+}
+
