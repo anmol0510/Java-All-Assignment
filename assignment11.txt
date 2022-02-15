@@ -1,0 +1,242 @@
+ASSIGNMENT NO.11
+================
+Session no 1
+------------
+1.Create a class of ArrayList and add the objects by using add method and print the all the values which you added.
+package collection;
+
+import java.util.ArrayList;
+
+public class ArrayListEx {
+public static void main(String[] args) {
+
+	
+	ArrayList a1=new ArrayList();
+	a1.add(123);
+	a1.add(new Integer(111));
+	a1.add(45.0f);
+	a1.add("Anmol");
+	a1.add(true);
+	a1.add(null);
+	a1.add('s');
+	a1.add("Anmol");
+	System.out.println("All values:"+a1);
+}
+}
+2.Create a of Linked List add the heterogenous objects print all the objects.
+package collection;
+
+import java.util.LinkedList;
+
+public class ArrayListEx {
+public static void main(String[] args) {
+	LinkedList a=new LinkedList();
+	a.add(100);
+	a.add("Anmol");
+	a.add(30.32f);
+	a.add(false);
+	a.add(null);
+	System.out.println(a);
+}
+}
+3.Create a LinkedList class and apply different methods for that class size(),contains(),isEmpty(),getFisrt(). print the results.
+package collection;
+
+import java.util.LinkedList;
+
+public class ArrayListEx {
+public static void main(String[] args) {
+	LinkedList a=new LinkedList();
+	a.add(100);
+	a.add("Anmol");
+	a.add(30.32f);
+	a.add(false);
+	a.add(null);
+	System.out.println(a);
+	System.out.println("List size:"+a.size());
+	System.out.println("contains Anmol:"+a.contains("Anmol"));
+	System.out.println("get first element:"+a.getFirst());
+	System.out.println("get last element:"+a.getLast());
+	System.out.println("is empty:"+a.isEmpty());
+	System.out.println("remove:"+a.remove());
+	System.out.println("0th index:"+a.remove(0));
+	a.add("Anmol");
+	System.out.println(a);
+}
+}
+4.class name is test and taking arraylist object add different objects and print the values by using for loop and foreach loop.
+package collection;
+
+import java.util.ArrayList;
+
+public class Test {
+	public static void main(String[] args) {
+		ArrayList a=new ArrayList();
+		
+		for(int i=0;i<10;i++) {
+			a.add(i);
+		}
+		System.out.println("Array="+a);
+		                        //for loop
+		System.out.println("FOR LOOP:");
+		for(int i=0;i<a.size();i++) {
+			System.out.println(a.get(i));
+		}
+		System.out.println("FOR EACH LOOP");
+		for(Object o:a) {
+		System.out.println(o);
+	}
+
+}
+}
+5.Create a class with generics(perticular type integer) and add the values print even numbers.
+package collection;
+
+import java.util.ArrayList;
+
+public class Gener {
+public static void main(String[] args) {
+	ArrayList <Integer> a =new ArrayList<Integer>();
+
+   for(int i=0;i<10;i++) {
+	   a.add(i);
+   }
+	System.out.println("Array="+a);
+	System.out.println("Even numbers:");
+	
+	for(Object o:a){
+		Integer i = (Integer)o;
+		if(i%2==0) {
+		System.out.println(i);
+	}
+}
+	
+}
+6.Create a ArrayList class by using Iterator print the values.
+package collection;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+
+
+public class ArrayList1 {
+public static void main(String[] args) {
+	ArrayList<String> a=new ArrayList();
+	a.add("Munna");
+	a.add("Bhai");
+	a.add("MBBS");
+	System.out.println("A="+a);
+	Iterator itr=a.iterator();
+	while(itr.hasNext()) {
+		System.out.println(itr.next());
+	}
+}
+}
+7.Create a class with generics and apply ListIterator cursor on that class and print the values.
+package collection;
+
+import java.util.ArrayList;
+import java.util.ListIterator;
+
+
+
+public class ArrayList1 {
+public static void main(String[] args) {
+	ArrayList<String> a=new ArrayList();
+	a.add("Munna");
+	a.add("Bhai");
+	a.add("MBBS");
+	System.out.println("A="+a);
+	ListIterator itr=a.listIterator();
+	System.out.println("FORWARD:");
+	while(itr.hasNext()) {
+		System.out.println(itr.next());
+	}
+	System.out.println("REVERSE:");
+	while(itr.hasPrevious()) {
+		System.out.println(itr.previous());
+	}
+
+}
+}
+
+
+Session No.2
+------------
+1.Create a priorityQueue class add elements and print the values.
+package collection;
+
+import java.util.Iterator;
+import java.util.PriorityQueue;
+
+public class PriorQueue {
+public static void main(String[] args) {
+	PriorityQueue<String> a=new PriorityQueue<String>();
+	a.add("Anmol");
+	a.add("Yajat");
+	a.add("Rohan");
+	a.add("Bhawuk");
+	System.out.println("A="+a);
+	Iterator itr=a.iterator();
+	while(itr.hasNext()) {
+		System.out.println(itr.next());
+	}
+	
+}
+}
+
+2.Create a of HasSet add the heterogenous objects print all the objects.
+package collection;
+
+import java.util.HashSet;
+
+public class Hash {
+public static void main(String[] args) {
+	HashSet h=new HashSet();
+	h.add("Anmol");
+	h.add("JEcRC");
+	h.add("university");
+	h.add("jaipur");
+	System.out.println(h);
+	
+}
+}
+3.Create a of Linked HashSet add the heterogenous objects print all the objects.
+package collection;
+
+import java.util.LinkedHashSet;
+
+public class Hash {
+public static void main(String[] args) {
+	LinkedHashSet h=new LinkedHashSet();
+	h.add("Anmol");
+	h.add("JEcRC");
+	h.add("bombay");
+	h.add(98);
+	System.out.println(h);
+	
+}
+}
+
+4.By using Generics create Tree Set and print the all the values.
+package collection;
+
+import java.util.Iterator;
+import java.util.TreeSet;
+
+public class Tree {
+public static void main(String[] args) {
+	TreeSet<String> t=new TreeSet();
+	t.add("abc");
+	t.add("def");
+	t.add("ghi");
+	t.add("ckl");
+	System.out.println(t);
+	Iterator itr=t.iterator();
+	while(itr.hasNext()) {
+		System.out.println(itr.next());
+	}
+}
+}
+

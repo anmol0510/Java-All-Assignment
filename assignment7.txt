@@ -1,0 +1,109 @@
+Assignment No.7
+===============
+Session 1-
+----------
+1.Create an Array of Employee class and initialize array elements with different employee objects.
+package com.ia.atcs5;
+class Employee{
+	
+	int id;
+	String name;
+	Employee(int empid,String n){
+		id = empid;
+		name = n;
+	}
+	public void showData() {
+		System.out.println("ID:"+id+"Name:"+name);
+	}
+}
+public class Arr {
+	public static void main(String[] args) {
+		
+	
+Employee[] e=new Employee[2];
+e[0]=new Employee(100,"Anmol");
+e[1]=new Employee(101,"Piyush");
+e[0].showData();
+e[1].showData();
+	}
+}
+
+
+2.Create a class Beverages,the Tea and Coffee sub classes are using the common method addMilk and they are implementing abstract method void addIngredient.
+package com.ia.atcs5;
+abstract class Beverages
+{
+	void addMilk()
+	{
+		System.out.println("Milk added");
+	}
+	
+	abstract void addIngredients();
+}
+
+class Tea extends Beverages
+{
+	void addIngredients()
+	{
+		System.out.println("Tea leaves added");
+	}
+}
+
+class Coffee extends Beverages
+{
+	void addIngredients()
+	{
+		System.out.println("Coffee Powder added");
+	}
+}
+public class Abst {
+	public static void main(String[] args) {
+		Tea t1 = new Tea();
+		
+		t1.addMilk();
+		t1.addIngredients();
+		Coffee c1 = new Coffee();
+		c1.addMilk();
+		c1.addIngredients();
+	}
+
+}
+
+Session 2-
+----------
+1.create a PrivateAccess class, private data members when we are trying to call the private data member and method of a PrivateClass class it gives us a compile-time error because private data members and methods have an access level to PrivateClass class only.
+package com.ia.atcs5;
+class PrivateAccess{
+	int i=211;
+	private void show(){
+		System.out.println("This is private method");
+	}
+}
+public class Priv extends PrivateAccess{
+	public static void main(String[] args) {
+		Priv p=new Priv();
+		System.out.println(p.a);
+		p.show();
+	}
+	
+
+}
+
+3.create a class ProtectedClass under a package pack1 in which we declare a protected method show(), create a class ProtectedAccess under a package mypack1 and import a package pack1.
+package com.ia.atcs5;
+
+public class ProtectedClass {
+protected void show() {
+	System.out.println("This is A show method");
+}
+}
+
+package MyPack1;
+import com.ia.atcs5.*;
+public class ProtectedAcess extends ProtectedClass {
+public static void main(String[] args) {
+	ProtectedAcess pc=new ProtectedAcess();
+	pc.show();
+}
+}
+

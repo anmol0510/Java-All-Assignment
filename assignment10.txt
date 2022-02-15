@@ -1,0 +1,37 @@
+ASSIGNMENT NO.10
+
+1.write a Algorithm of bubble sort.
+--Begin Bubble sort(arr)
+--for all array elements
+--if (arr[i]>arr[i+1])
+--swap(arr[i],arr[i+1])
+--end if loop
+--end for loop
+--return arr
+end of bubble sort
+
+2.Write a Algorithm of merge sort .
+--begin Merge sort(arr, beg, end)  
+--if beg < end  
+--set mid = (beg + end)/2  
+--merge sort(arr, beg, mid)  
+--merge sort(arr, mid + 1, end)  
+--merge(arr, beg, mid, end) 
+--end of if  
+--end merge sort 
+ 
+3.Write a Algorithm to  quicksort .
+--Make any element as pivot
+--partition the array on the basis of pivot
+--apply quick sort on left partition
+--apply quick sort on right partition
+
+PARTITION PART-
+--choose the highest index value as pivot
+--take two variables to point left and right of list excluding pivot
+--left point to the low index
+--right point to the high
+--while value at left is less than pivot move right
+--while value at right is greater than pivot move left
+--if both step 5 and step 6 does not match swap left and right
+--if left is greater than or equal to right,the pivot where they met is new pivot
