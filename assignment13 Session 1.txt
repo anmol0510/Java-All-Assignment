@@ -1,0 +1,141 @@
+ASSIGNMENT NO. 13
+=================
+Session no.1-
+--------------
+1.Create a class name Demo, create a file.
+package Assign13;
+
+import java.io.File;
+import java.io.IOException;
+
+public class Demo {
+public static void main(String[] args) throws IOException {
+	File f=new File("Hello.txt");
+	f.createNewFile();
+	System.out.println("File is created");
+}
+}
+2.create a class and add file and folder into the project.
+package Assign13;
+
+import java.io.File;
+import java.io.IOException;
+
+public class Demo {
+public static void main(String[] args) throws IOException {
+//	File f=new File("Hello.txt");
+//	f.createNewFile();
+//	System.out.println("File is created");
+	File f1=new File("abc");
+	boolean b=f1.mkdir();
+}
+}
+
+
+3.create a class and write the information by using File Writer.
+package Assign13;
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Demo {
+public static void main(String[] args) throws IOException {
+	FileWriter fw=new FileWriter("Hello.txt");
+	fw.write("Welcome");
+	fw.write("Back");
+	fw.write(97);
+	fw.write(99);
+	fw.close();
+	System.out.println("File is inserted");
+
+	
+}
+}
+
+
+4.create a class and write the information by using Buffered Writer.
+package Assign13;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class Demo {
+public static void main(String[] args) throws IOException {
+	FileWriter fw=new FileWriter("Hello.txt");
+	BufferedWriter bw=new BufferedWriter(fw);
+	bw.write("Welcome");
+	bw.write("Back");
+	bw.write(97);
+	bw.write(99);
+	bw.close();
+	System.out.println("File is inserted");
+
+	
+
+}
+}
+
+
+
+5.create a class and write the information by using Print Writer.
+package Assign13;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+public class Demo {
+public static void main(String[] args) throws IOException {
+	FileWriter fw=new FileWriter("Hello.txt");
+	PrintWriter p=new PrintWriter(fw);
+	p.println("Welcome");
+	p.println("Back");
+	p.println(97);
+	p.println(99);
+	p.close();
+	System.out.println("File is inserted");
+
+	
+
+}
+}
+
+6.create a class and read the information by using File Reader.
+package Assign13;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Demo {
+public static void main(String[] args) throws IOException  {
+	FileReader fr=new FileReader("Hello.txt");
+	while(fr.read()!= -1) {
+		char c=(char) fr.read();
+		System.out.println(c);
+	}
+	}
+}
+
+7.create a class and read the information by using Buffered Reader.
+package Assign13;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Demo {
+public static void main(String[] args) throws IOException {
+	FileReader fr=new FileReader("Hello.txt");
+	BufferedReader br=new BufferedReader(fr);
+	String data=br.readLine();
+	while(data != null) {
+		System.out.println(data);
+		data = br.readLine();
+	}
+	
+}
+}
+

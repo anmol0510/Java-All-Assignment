@@ -1,0 +1,91 @@
+ASSIGNMENT NO 12
+================
+Session no. 2-
+--------------
+1.create a class and print the elements by using keySet.
+package Assign12;
+
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeMap;
+
+public class KeySet {
+public static void main(String[] args) {
+	TreeMap<String,Integer> m=new TreeMap();
+	m.put("Anmol",111);
+	m.put("Jecrc",112);
+	m.put("University",113);
+	m.put("Jaipur",114);
+	m.put("Rajasthan",115);
+	System.out.println(m);
+	Set<String> keys=m.keySet();
+	
+	Iterator itr=keys.iterator();
+	while(itr.hasNext()) {
+		System.out.println(itr.next());
+	}
+}
+}
+
+2.Create a class print all the elements with EntrySet.
+package Assign12;
+
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
+
+public class KeySet {
+public static void main(String[] args){
+	TreeMap<String,Integer> m=new TreeMap();
+	m.put("Anmol",111);
+	m.put("Jecrc",112);
+	m.put("University",113);
+	m.put("Jaipur",114);
+	m.put("Rajasthan",115);
+	System.out.println(m);
+	Set<Entry<String,Integer>> result=m.entrySet();
+	
+	Iterator itr=result.iterator();
+	while(itr.hasNext()) {
+		System.out.println(itr.next());
+}
+}
+}
+3.Create a class with HashMap use to print the values.
+package Assign12;
+
+import java.util.HashMap;
+import java.util.Iterator;
+
+public class HashMapEx {
+public static void main(String[] args) {
+	HashMap hs=new HashMap();
+	hs.put(100, "Ram");
+	hs.put(101, "Sita");
+	hs.put(102, "Laxman");
+	hs.put(103, "Surpankha");
+	System.out.println(hs);
+	
+	
+}
+}
+
+4.By Using LinkedHashMap add elements and print the values.
+
+package Assign12;
+
+import java.util.LinkedHashMap;
+
+public class LinkedHashMapEx {
+public static void main(String[] args) {
+	LinkedHashMap<String, Integer> lhs=new LinkedHashMap();
+	lhs.put("Ram",100);
+	lhs.put("Sita",101);
+	lhs.put("Laxman",103);
+	lhs.put("Surpankha",104);
+	System.out.println(lhs);
+	
+	
+}
+}
