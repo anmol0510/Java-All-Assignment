@@ -1,0 +1,136 @@
+ASSIGNMENT NO. 14
+=================
+Session no.1
+-------------
+1.create a class and with divide two numbers by using Scanner class(z=a/b) without try catch.
+package Assign14;
+
+import java.util.Scanner;
+
+public class ExceptionEx1 {
+public static void main(String[] args) {
+	Scanner sc=new Scanner(System.in);
+	System.out.println("Enter First Number:");
+	int a=sc.nextInt();
+	Scanner sc1=new Scanner(System.in);
+	System.out.println("Enter Second Number:");
+	int b=sc1.nextInt();
+	int z=a/b;
+	System.out.println("Divison:"+z);
+}
+}
+
+2.create a class and take the input from by using scanner class, as a end user take two numbers with division and observe which type of exception raised and apply try catch blocks.
+package Assign14;
+
+import java.util.Scanner;
+
+public class ExceptionEx1 {
+public static void main(String[] args) {
+	Scanner sc=new Scanner(System.in);
+	System.out.println("Enter First Number:");
+	int a=sc.nextInt();
+	Scanner sc1=new Scanner(System.in);
+	System.out.println("Enter Second Number:");
+	int b=sc1.nextInt();
+	try {
+	int z=a/b;
+	System.out.println("Divison:"+z);
+}
+	catch(ArrayIndexOutOfBoundsException ae) {
+		System.out.println("Please enter valid index");
+	}
+	catch(ArithmeticException ae) {
+		System.out.println("don't enter denominator as zero");
+		
+	}
+	System.out.println("Remaining code print");
+}
+}
+
+3.Create a class with single try multi catch blocks.
+package Assign14;
+
+
+
+public class ExceptionEx1 {
+public static void main(String[] args) {
+
+	try {
+		int a[]=new int[5];
+		a[4]=30/2;
+		String s=null;
+		int x=Integer.parseInt(s);
+		System.out.println(s.length());
+		System.out.println("No error:"+a[4]+" "+x);
+	}
+	catch(ArrayIndexOutOfBoundsException ae) {
+		System.out.println("Please enter valid index");
+	}
+	catch(ArithmeticException ae) {
+		System.out.println("Dont enter denominator as zero");
+	}
+	catch(NumberFormatException e) {
+		System.out.println("We cant convert string to number");
+	}
+	catch(Exception ae) {
+		System.out.println("Unable to find length of string");
+	}
+	finally {
+		System.out.println("Executes every time");
+	}
+	System.out.println("Remaining");
+}
+}
+
+Session no 2
+------------
+1.create a class with user defined exceptions.
+package Assign14;
+class MyException extends Exception{
+	private int age;
+	public MyException(int age) {
+		this.age=age;
+		
+	}
+	public String toString() {
+		return "You are not eligible";
+		
+	}
+}
+public class ExceptionEx2 {
+        static void validation(int age) throws MyException {
+        	if(age<18)
+        		throw new MyException(age);
+        	else {
+        		System.out.println("You are eligible for vote");
+        	}
+        	
+        }
+        public static void main(String[] args) throws MyException {
+			
+			ExceptionEx2.validation(22);
+			System.out.println("Rest to code");
+		}
+        
+}
+
+
+2.create a class with Marks, and valid Marks method, give some number marks are less than he/she fails otherwise pass by using throw keyword.
+package Assign14;
+
+public class ExceptionEx3 {
+	public static void validate(int marks){
+		if(marks<33) {
+			throw new ArithmeticException("Failed");
+		}
+		else {
+			System.out.println("Passed");
+		}
+	}
+public static void main(String[] args) {
+	validate(20);
+	System.out.println("Remaining");
+}
+}
+
