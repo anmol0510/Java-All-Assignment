@@ -1,0 +1,49 @@
+ASSIGNMENT NO. 13
+=================
+Session no. 2
+--------------
+1.create a class ArrayList apply without generics.
+package Assign13;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class ArrrayListEx {
+public static void main(String[] args) {
+	ArrayList a=new ArrayList();
+	a.add(6);
+	a.add(false);
+	a.add(null);
+	a.add(55.03f);
+	a.add("Anmol");
+	Iterator itr = a.iterator();
+	while(itr.hasNext()) {
+		System.out.print(itr.next()+" ");
+
+	}
+}
+}
+
+
+2.create a class LinkedList apply with generics.
+package Assign13;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+
+public class LinkedListEx {
+public static void main(String[] args) {
+	LinkedList<String> a=new LinkedList();
+	a.add("Anmol");
+	a.add("Khatod");
+	a.add(null);
+	a.add("JECRC");
+	a.add("University");
+	
+	Iterator itr = a.iterator();
+	while(itr.hasNext()) {
+		System.out.print(itr.next()+" ");
+	}
+
+}
+}
