@@ -1,0 +1,210 @@
+ASSIGNMENT NO.18-
+=================
+Session no.2-
+==============
+
+1.Create a table Student add student details modify the all the table columns by using commands.
+->
+==create database
+postgres=# Create database Details;
+CREATE DATABASE
+
+==To connect with the database
+postgres=# \c details;
+You are now connected to database "details" as user "postgres"
+
+==create table
+details=# create table student(id int, name varchar(10), location varchar(10));
+CREATE TABLE
+details=# \d student
+                      Table "public.student"
+  Column  |         Type          | Collation | Nullable | Default
+----------+-----------------------+-----------+----------+---------
+ id       | integer               |           |          |
+ name     | character varying(10) |           |          |
+ location | character varying(10) |           |          |
+
+==to see table data in column
+details=# select * from student;
+ id | name | location
+----+------+----------
+(0 rows)
+
+==to add more columns in table
+details=# alter table student add column subject varchar(15);
+ALTER TABLE
+details=# \d student;
+                      Table "public.student"
+  Column  |         Type          | Collation | Nullable | Default
+----------+-----------------------+-----------+----------+---------
+ id       | integer               |           |          |
+ name     | character varying(10) |           |          |
+ location | character varying(10) |           |          |
+ subject  | character varying(15) |           |          |
+
+==to rename the column
+details=# alter table student rename column id to sid;
+ALTER TABLE
+details=# \d student;
+                      Table "public.student"
+  Column  |         Type          | Collation | Nullable | Default
+----------+-----------------------+-----------+----------+---------
+ sid      | integer               |           |          |
+ name     | character varying(10) |           |          |
+ location | character varying(10) |           |          |
+ subject  | character varying(15) |           |          |
+
+==how to modify
+details=# alter table student alter column subject type varchar(20);
+ALTER TABLE
+details=# \d student;
+                      Table "public.student"
+  Column  |         Type          | Collation | Nullable | Default
+----------+-----------------------+-----------+----------+---------
+ sid      | integer               |           |          |
+ name     | character varying(10) |           |          |
+ location | character varying(10) |           |          |
+ subject  | character varying(20) |           |          |
+
+==to drop a column
+details=# alter table student drop column subject;
+ALTER TABLE
+details=# \d student;
+                      Table "public.student"
+  Column  |         Type          | Collation | Nullable | Default
+----------+-----------------------+-----------+----------+---------
+ sid      | integer               |           |          |
+ name     | character varying(10) |           |          |
+ location | character varying(10) |           |          |
+
+==to rename the table name
+details=# alter table student RENAME to student1;
+ALTER TABLE
+details=# \d student1;
+                      Table "public.student1"
+  Column  |         Type          | Collation | Nullable | Default
+----------+-----------------------+-----------+----------+---------
+ sid      | integer               |           |          |
+ name     | character varying(10) |           |          |
+ location | character varying(10) |           |          |
+
+
+details=# \d student;
+Did not find any relation named "student".       //error shown because there is no student table now because its changed to student1.
+
+==again change table name to student
+details=# alter table student1 RENAME to student;
+ALTER TABLE
+details=# \d student;
+                      Table "public.student"
+  Column  |         Type          | Collation | Nullable | Default
+----------+-----------------------+-----------+----------+---------
+ sid      | integer               |           |          |
+ name     | character varying(10) |           |          |
+ location | character varying(10) |           |          |
+
+==insert values into table
+details=# insert into student values(100,'Anmol','Jaipur');
+INSERT 0 1
+details=# insert into student values(101,'Yajat','Pakistan');
+INSERT 0 1
+details=# insert into student values(102,'Putin','Russia');
+INSERT 0 1
+details=# insert into student values(103,'Jelsinki','Ukraine');
+INSERT 0 1
+details=# select * from student;   //see the values
+ sid |   name   | location
+-----+----------+----------
+ 100 | Anmol    | Jaipur
+ 101 | Yajat    | Pakistan
+ 102 | Putin    | Russia
+ 103 | Jelsinki | Ukraine
+(4 rows)
+
+==update values
+
+details=# update student set location='Dubai' where name='Yajat';
+UPDATE 1
+details=# select * from student;
+ sid |   name   | location
+-----+----------+----------
+ 100 | Anmol    | Jaipur
+ 102 | Putin    | Russia
+ 103 | Jelsinki | Ukraine
+ 101 | Yajat    | Dubai
+(4 rows)
+
+==truncate table
+details=# truncate table student;
+TRUNCATE TABLE
+details=# select * from student;
+ sid | name | location
+-----+------+----------
+(0 rows)
+
+
+2.Create a tables Manager and Employee add details of both tables and join by using equijoin.
+
+==create manager table
+info=# create table manager(id int,name varchar(15),dept varchar(15));
+CREATE TABLE
+
+==create employee table
+info=# create table employee(id int,name varchar(15),dept varchar(15));
+CREATE TABLE
+
+==insert value into manager table
+info=# insert into manager values(100,'Anmol','car');
+INSERT 0 1
+info=# insert into manager values(101,'khatod','bus');
+INSERT 0 1
+info=# insert into manager values(102,'jaipur','jeep');
+INSERT 0 1
+info=# select * from manager;
+ id  |  name  | dept
+-----+--------+------
+ 100 | Anmol  | car
+ 101 | khatod | bus
+ 102 | jaipur | jeep
+(3 rows)
+
+==insert value into employee table
+info=# insert into employee values(102,'pappu','cycle');
+INSERT 0 1
+info=# insert into employee values(100,'cbc','ca');
+INSERT 0 1
+info=# insert into employee values(100,'cbc','car');
+INSERT 0 1
+info=# insert into employee values(104,'cbcd','jeep');
+INSERT 0 1
+info=# select * from employee;
+ id  | name  | dept
+-----+-------+-------
+ 102 | pappu | cycle
+ 100 | cbc   | ca
+ 100 | cbc   | car
+ 104 | cbcd  | jeep
+(4 rows)
+
+==using equijoin(like dept as primary key in manager key and as foreign key in employee)
+info=# select * from manager m ,employee e where m.dept=e.dept;
+ id  |  name  | dept | id  | name | dept
+-----+--------+------+-----+------+------
+ 100 | Anmol  | car  | 100 | cbc  | car
+ 102 | jaipur | jeep | 104 | cbcd | jeep
+(2 rows)
+
+
+info=# select * from manager m ,employee e where m.name=e.name;
+ id | name | dept | id | name | dept
+----+------+------+----+------+------
+(0 rows)
+
+
+info=# select * from manager m ,employee e where m.id=e.id;
+ id  |  name  | dept | id  | name  | dept
+-----+--------+------+-----+-------+-------
+ 100 | Anmol  | car  | 100 | cbc   | car
+ 100 | Anmol  | car  | 100 | cbc   | ca
+ 102 | jaipur | jeep | 102 | pappu | cycle
+(3 rows)

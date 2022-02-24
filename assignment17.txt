@@ -1,0 +1,151 @@
+ASSIGNMENT NO. 17-
+====================
+1.Create a Product class write a query add and update and delete products.
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Test {
+public static void main(String[] args) throws ClassNotFoundException, SQLException {
+	
+	//connect with database
+		Class.forName("org.postgresql.Driver");
+		
+		//create the connection
+		Connection conn=DriverManager.getConnection("jdbc:postgresql://localhost/mumbai","postgres","12345@");
+		
+		//create statement
+		Statement stmt = conn.createStatement();
+		
+//		boolean result=stmt.execute("create table product(id int , name varchar(20))");  //create the table
+//		int result=stmt.executeUpdate("insert into product values(1 , 'Anmol')");  //insert value to table
+//		int result=stmt.executeUpdate("insert into product values(2 , 'Arjun')");  //insert value to table
+//		int result=stmt.executeUpdate("insert into product values(3 , 'Laxman')");  //insert value to table
+		
+		int result = stmt.executeUpdate("delete from product where id=2");  //deleting row
+		
+		conn.close();
+		System.out.println("Table created"+result);
+}
+}
+
+mumbai=# select * from product;
+ id |  name
+----+--------
+  1 | Anmol
+  3 | Laxman
+(2 rows)
+
+2.CRUD operations on Pizza add,update,delete,create.
+==create the table pizza
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Pizza {
+public static void main(String[] args) throws ClassNotFoundException, SQLException {
+	//connect with database
+			Class.forName("org.postgresql.Driver");
+			
+			//create the connection
+			Connection conn=DriverManager.getConnection("jdbc:postgresql://localhost/mumbai","postgres","12345@");
+			
+			//create statement
+			Statement stmt = conn.createStatement();
+			
+			boolean result=stmt.execute("create table pizza(id int , price int)");  //create the table
+
+			
+			conn.close();
+			System.out.println("Table created"+result);
+}
+}
+
+==insert valuee
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Pizza {
+public static void main(String[] args) throws ClassNotFoundException, SQLException {
+	//connect with database
+			Class.forName("org.postgresql.Driver");
+			
+			//create the connection
+			Connection conn=DriverManager.getConnection("jdbc:postgresql://localhost/mumbai","postgres","12345@");
+			
+			//create statement
+			Statement stmt = conn.createStatement();
+			
+			//int result=stmt.executeUpdate("insert into product values(200 , 400)");  //insert value to table
+			  //int result=stmt.executeUpdate("insert into product values(300 , 500)");  //insert value to table
+			int result=stmt.executeUpdate("insert into product values(400 , 600)");  //insert value to table
+
+			
+			conn.close();
+			System.out.println("Table created"+result);
+}
+}
+
+==delete value
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Pizza {
+public static void main(String[] args) throws ClassNotFoundException, SQLException {
+	//connect with database
+			Class.forName("org.postgresql.Driver");
+			
+			//create the connection
+			Connection conn=DriverManager.getConnection("jdbc:postgresql://localhost/mumbai","postgres","12345@");
+			
+			//create statement
+			Statement stmt = conn.createStatement();
+			
+			//int result=stmt.executeUpdate("insert into product values(200 , 400)");  //insert value to table
+			  //int result=stmt.executeUpdate("insert into product values(300 , 500)");  //insert value to table
+			int result=stmt.executeUpdate("insert into product values(400 , 600)");  //insert value to table
+
+			
+			conn.close();
+			System.out.println("Table created"+result);
+}
+}
+
+
+
+==fetching value
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Pizza {
+public static void main(String[] args) throws ClassNotFoundException, SQLException {
+	//connect with database
+			Class.forName("org.postgresql.Driver");
+			
+			//create the connection
+			Connection conn=DriverManager.getConnection("jdbc:postgresql://localhost/mumbai","postgres","12345@");
+			
+			//create statement
+			Statement stmt = conn.createStatement();
+			
+			ResultSet result = stmt.executeQuery("select * from pizza");
+			
+			while(result.next()) {
+				System.out.println(result.getInt(1)+" "+result.getInt(2));
+			}
+
+			
+			conn.close();
+			System.out.println("fetching values");
+}
+}

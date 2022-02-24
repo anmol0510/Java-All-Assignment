@@ -1,0 +1,349 @@
+ASSIGNMENT NO.15 -
+==================
+Session no.1-
+=============
+1.Create a Thread by extending the Thread class.
+package Assign15;
+
+class MyThread extends Thread{
+	public void run() {
+		for(int i=0;i<10;i++) {
+		System.out.println("One thread");
+	}}
+}
+//In this we can't predict output
+public class ThreadEx {
+public static void main(String[] args) {
+	MyThread m=new MyThread();
+	m.start();
+	for(int j=1;j<10;j++) {
+	System.out.println("Second thread");
+}}
+}
+
+2.Create a Thread by Implements the Runnable Interface.
+package Assign15;
+
+class MyRun implements Runnable{
+    public void run() {
+    	for(int i=0;i<10;i++) {
+    		System.out.println("One Thread");
+    	}
+    }
+    
+    public void show() {
+    	System.out.println("Jecrc University");
+    }
+}
+public class ThreadEx1 {
+public static void main(String[] args) {
+	MyRun r=new MyRun();
+	Thread t=new Thread(r);
+	t.start();
+	r.show();
+	for(int j=0;j<10;j++) {
+		System.out.println("Second Thread");
+	}
+}
+}
+
+
+3.Create a Thread by extending Thread class set and get the name of thread.
+package Assign15;
+
+class Bhai extends Thread{
+	public void run() {
+		System.out.println("One thread");
+		System.out.println(Thread.currentThread().getName());
+	}
+}
+public class ThreadEx2 {
+	public static void main(String[] args) {
+		Bhai s=new Bhai();
+		s.start();
+		System.out.println("Second Thread");
+		System.out.println(Thread.currentThread().getName());
+		
+	}
+}
+
+
+
+4.Create a Thread by extending Thread class set and get the priority of thread.
+
+package Assign15;
+
+
+class MyThrea extends Thread{
+	public void run() {
+		for (int i=0;i<5;i++) {
+			System.out.println("Priority:"+Thread.currentThread().getPriority());
+		}
+	
+	}
+	public void show() {
+		System.out.println("Priority1:"+Thread.currentThread().getPriority());
+	}
+}
+public class ThreadEx3Prior {
+public static void main(String[] args) {
+	MyThrea m1=new MyThrea();
+//	m1.run();
+	m1.show();
+	for(int j=0;j<10;j++) {
+		System.out.println("Second priority:"+Thread.currentThread().getPriority());
+	}
+	m1.run();
+//	m1.show();
+}
+}
+
+5.Create a Thread by extending Thread class apply Yield Method.
+package Assign15;
+
+class Demo extends Thread{
+	public void run() {
+		for(int i=1;i<11;i++) {
+			System.out.println(i*i);
+			Thread.yield();
+		}
+	}
+}
+public class ThreadEx4Yield {
+public static void main(String[] args) {
+	Demo d=new Demo();
+	d.start();
+	for(int j=0;j<10;j++) {
+		System.out.println("Second Thread");
+	}
+}
+}
+
+
+6.Create a Thread by extending Thread class apply join Method.
+package Assign15;
+
+class Univ extends Thread{
+	public void run() {
+		for(int i=0;i<10;i++) {
+			System.out.println("Child Thread");
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+}
+public class ThreadEx5Join {
+public static void main(String[] args) {
+	Univ u=new Univ();
+	u.start();
+	try {
+		u.join(1000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	for(int i=0;i<10;i++) {
+		System.out.println("Main Thread");
+	}
+}
+}
+
+
+7.Create a Thread by extending Thread class apply sleep Method.
+
+package Assign15;
+class Bhai1 extends Thread{
+	public void run() {
+		for (int i = 0; i < 10; i++) {
+			System.out.println("child thread"+i);
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+}
+
+public class ThreadEx5Join {
+public static void main(String[] args) {
+Bhai1 b=new Bhai1();
+b.start();
+
+
+	
+//	for(int i=0;i<10;i++) {
+//		System.out.println("Main Thread"+i);
+//		try {
+//			Thread.sleep(2000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//	}
+}
+}
+
+
+
+Session no.2-
+-------------
+1.Create a Deadlock class to demonstrate deadlock in multithreading environment.
+package Assign15;
+class first{
+	public synchronized void a1(second b) {
+		System.out.println("Thread 1 start execution");
+		try{
+			Thread.sleep(1000);
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+		System.out.println("Thread 1 try to call second method");
+		b.last();
+	}
+	public synchronized void last(){
+		System.out.println("Inside 1 this is the last method");
+	}
+}
+
+class second{
+	public synchronized void b1(first a) {
+		System.out.println("Thread 2 start execution");
+		try{
+			Thread.sleep(1000);
+		}
+		catch (InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+		System.out.println("Thread 2 try to call second method");
+		a.last();
+	}
+	public synchronized void last(){
+		System.out.println("Inside 2 this is the last method");
+	}
+}
+public class Deadlock1 extends Thread {
+    first f=new first();
+    second s=new second();
+    
+    public void m() {
+    	this.start();
+    	f.a1(s);
+    	}
+    public void run() {
+    	s.b1(f);
+    }
+    public static  void main(String[] args) {
+		Deadlock1 g = new Deadlock1();
+		g.m();
+	}
+}
+
+
+2.Implement wait, notify and notifyAll methods.
+package Assign15;
+
+class A{
+	int money=1000;
+	synchronized void withdraw(int money) {
+		System.out.println("Withdraw Money");
+		if (this.money<money) {
+			System.out.println("Less Amount");
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			this.money-=money;
+			System.out.println("Withdraw Completed");
+		}
+		
+	}
+	synchronized void deposit(int money) {
+		System.out.println("Deposit Money");
+		this.money+=money;
+		System.out.println("Deposit Completed");
+		notify();
+	}
+}
+public class MethodsEx {
+	public static void main(String[] args) {
+		A a=new A();
+		new Thread() {
+			public void run() {
+				a.withdraw(2000);
+			}
+		}.start();
+		new Thread() {
+			public void run() {
+				a.deposit(2000);
+			}
+		}.start();
+	}
+
+}
+
+3.Create a Account class with methods withdraw, deposit, enquiry, add with synchronized keywords observe the output.
+package Assign15;
+
+class A{
+	int money=1000;
+	synchronized void withdraw(int money) {
+		System.out.println("Withdraw Money");
+		if (this.money<money) {
+			System.out.println("Less Amount");
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			this.money-=money;
+			System.out.println("Withdraw Completed");
+		}
+		
+	}
+	synchronized void deposit(int money) {
+		System.out.println("Deposit Money");
+		this.money+=money;
+		System.out.println("Deposit Completed");
+		notify();
+	}
+	synchronized void enquiry(int money) {
+		System.out.println("Enquiry");
+		
+		System.out.println("Enquiry Completed");
+		notify();
+}}
+public class MethodsEx {
+	public static void main(String[] args) {
+		A a=new A();
+		new Thread() {
+			public void run() {
+				a.withdraw(2000);
+			}
+		}.start();
+		new Thread() {
+			public void run() {
+				a.deposit(2000);
+			}
+		}.start();
+		new Thread() {
+			public void run() {
+				a.enquiry(20000);
+			}
+		}.start();
+	}
+
+}
