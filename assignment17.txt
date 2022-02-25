@@ -1,0 +1,91 @@
+ASSIGNMENT NO. 17-
+====================
+1.Create a Product class write a query add and update and delete products.
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Test {
+public static void main(String[] args) throws ClassNotFoundException, SQLException {
+	
+	//connect with database
+		Class.forName("org.postgresql.Driver");
+		
+		//create the connection
+		Connection conn=DriverManager.getConnection("jdbc:postgresql://localhost/mumbai","postgres","12345@");
+		
+		//create statement
+		Statement stmt = conn.createStatement();
+		
+//		boolean result=stmt.execute("create table product(id int , name varchar(20))");  //create the table
+//		int result=stmt.executeUpdate("insert into product values(1 , 'Anmol')");  //insert value to table
+//		int result=stmt.executeUpdate("insert into product values(2 , 'Arjun')");  //insert value to table
+//		int result=stmt.executeUpdate("insert into product values(3 , 'Laxman')");  //insert value to table
+		
+		int result = stmt.executeUpdate("delete from product where id=2");  //deleting row
+		
+		conn.close();
+		System.out.println("Table created"+result);
+}
+}
+
+mumbai=# select * from product;
+ id |  name
+----+--------
+  1 | Anmol
+  3 | Laxman
+(2 rows)
+
+2.CRUD operations on Pizza add,update,delete,create.
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Pizza1 {
+public static void main(String[] args) throws ClassNotFoundException, SQLException {
+	//connect with database
+	Class.forName("org.postgresql.Driver");
+	
+	//create the connection
+	Connection conn=DriverManager.getConnection("jdbc:postgresql://localhost/mumbai","postgres","12345@");
+	
+	//create statement
+	Statement stmt = conn.createStatement();
+	
+	boolean result=stmt.execute("create table pizza1(id int,price int)");//create the table
+	
+	int result1=stmt.executeUpdate("insert into pizza1 values(100,400)"); //insert the values
+	int result2=stmt.executeUpdate("insert into pizza1 values(200,500)");
+	int result3=stmt.executeUpdate("insert into pizza1 values(300,600)");
+	
+	int result4 = stmt.executeUpdate("delete from pizza1 where id=200");  //deleting row
+	
+	ResultSet result6 = stmt.executeQuery("select * from pizza1");       //fetching the values
+	
+	while(result6.next()) {
+		System.out.println(result6.getInt(1)+" "+result6.getInt(2));
+	}
+	
+	conn.close();
+	
+	System.out.println("Table is created "+result);
+	System.out.println("Value one is inserted "+result1);
+	System.out.println("Value two is inserted "+result2);
+	System.out.println("Value three is inserted "+result3);
+	System.out.println("delete value "+result4);
+	
+
+}
+}
+
+mumbai=# select *from pizza1;
+ id  | price
+-----+-------
+ 100 |   400
+ 300 |   600
+(2 rows)
+
