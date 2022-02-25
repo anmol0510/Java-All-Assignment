@@ -1,0 +1,64 @@
+Assignment No.19-
+=================
+1.create a class with end-user implementation scanner class, username and password matching or not otherwise it will give an error.
+
+mumbai=# insert into users values('Anmol','12345@');
+INSERT 0 1
+mumbai=# select * from users;
+ name  | password
+-------+----------
+ Anmol | 12345@
+(1 row)
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Scanner;
+
+public class PrepareEx {
+public static void main(String[] args) throws ClassNotFoundException, SQLException {
+	Scanner sc=new Scanner(System.in);
+	System.out.println("Enter username");
+	String name=sc.next();
+	System.out.println("Enter password");
+	String pwd=sc.next();
+	
+	Class.forName("org.postgresql.Driver");
+	
+	Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost/mumbai","postgres","12345@");
+	
+	  PreparedStatement stmt=conn.prepareStatement("select * from users where name=? and password=?");
+      
+      stmt.setString(1, name);
+      stmt.setString(2, pwd);
+      
+      ResultSet result=stmt.executeQuery();
+      
+      if(result.next()) {
+    	  System.out.println("login succuss");
+      }else
+      {
+    	  System.out.println("Login denied");
+      }
+      conn.close();
+}
+}
+
+
+output-
+-----------
+Enter username
+Anmol
+Enter password
+12345@
+login succuss
+
+
+Enter username
+Bhai
+Enter password
+123
+Login denied
