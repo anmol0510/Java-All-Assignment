@@ -1,0 +1,360 @@
+07-03-2022=
+============
+
+Example 1-
+
+package Assign19;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Example {
+	public static void main(String[] args) {
+		Pattern p = Pattern.compile("ab");
+		
+		Matcher m = p.matcher("abababababaabbabab");
+		
+		while(m.find()) {
+			System.out.println(m.start());
+		}
+	}
+
+
+}
+
+Output-
+0
+2
+4
+6
+8
+11
+14
+16
+
+
+Example 2-
+package Assign19;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Example {
+	public static void main(String[] args) {
+		int i =0;
+		Pattern p = Pattern.compile("ab");
+		
+		Matcher m = p.matcher("abababababaabbabab");
+		
+		while(m.find()) {
+			System.out.println(m.start()+" "+m.end());
+			i++;
+		}
+		System.out.println("No of occurences: "+i);
+	}
+
+
+}
+
+Output-
+0 2
+2 4
+4 6
+6 8
+8 10
+11 13
+14 16
+16 18
+No of occurences: 8
+
+Example 3-
+package Assign19;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Example2 { //character class
+	public static void main(String[] args) {
+		Pattern p = Pattern.compile("[abc]");
+		Pattern p1 = Pattern.compile("[^abc]");
+		Pattern p2 = Pattern.compile("[a-z]");
+		Pattern p3 = Pattern.compile("[A-Z]");
+		Pattern p4 = Pattern.compile("[0-9]");
+		Pattern p5 = Pattern.compile("[a-z A-Z]");
+		Pattern p6 = Pattern.compile("[a-z A-Z 0-9]");
+		Pattern p7 = Pattern.compile("[^a-z A-Z 0-9]");
+		Matcher m = p.matcher("abc238mpac");
+		Matcher m1 = p1.matcher("abc238mpac");
+		Matcher m2 = p2.matcher("abZcmCpTac");
+		Matcher m3 = p3.matcher("abcAmpDFacC");
+		Matcher m4 = p4.matcher("abc73nb45");
+		Matcher m5 = p5.matcher("abcACmpRaTc");
+		Matcher m6 = p6.matcher("abEcT2A38mp");
+		Matcher m7 = p7.matcher("aTbcW@23#8mQ*");
+		System.out.println("For p:");     
+		while(m.find()) {        
+			
+			System.out.println(m.start());
+		}
+		System.out.println("For p1:");
+		while(m1.find()) {
+			
+			System.out.println(m1.start());
+		}
+		System.out.println("For p2:");
+		while(m2.find()) {
+			
+			System.out.println(m2.start());
+		}
+		System.out.println("For p3:");
+		while(m3.find()) {
+			
+			System.out.println(m3.start());
+		}
+		System.out.println("For p4:");
+		while(m4.find()) {
+			
+			System.out.println(m4.start());
+		}
+		System.out.println("For p5:");
+		while(m5.find()) {
+			
+			System.out.println(m5.start());
+		}
+		System.out.println("For p6:");
+		while(m6.find()) {
+			
+			System.out.println(m6.start());
+		}
+		System.out.println("For p7:");
+		while(m7.find()) {
+			
+			System.out.println(m7.start());
+		}
+	}
+
+}
+
+Output-
+For p:
+0
+1
+2
+8
+9
+For p1:
+3
+4
+5
+6
+7
+For p2:
+0
+1
+3
+4
+6
+8
+9
+For p3:
+3
+6
+7
+10
+For p4:
+3
+4
+7
+8
+For p5:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+For p6:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+For p7:
+5
+8
+12
+
+Example 4-
+package Assign19;
+
+
+import java.util.regex.Pattern;
+
+public class Example3 {
+public static void main(String[] args) {
+	Pattern p = Pattern.compile("\\s");
+	String[] s = p.split("Anmol Khatod");
+	for(String s1:s) {
+		System.out.println(s1);
+	}
+	}
+}
+
+Output-
+Anmol
+Khatod
+
+Example 4-  (Mobile number)
+
+package Assign19;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Example4 {
+public static void main(String[] args) {
+	Pattern p = Pattern.compile("(0|91)?[7-9][2 3][0-9]{8}");
+	Matcher me = p.matcher(args[0]);
+	
+	if(me.find() && me.group().equals(args[0])) {
+		System.out.println("Valid mobile number");
+	}
+	else {
+		System.out.println("Invalid mobile number");
+	}
+}
+}
+
+
+Example 5-
+package Assign19;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+public class Example5 {
+public static void main(String[] args) {
+	LocalDate d = LocalDate.now();
+	System.out.println("Date: "+d);
+	
+	LocalTime t = LocalTime.now();
+	System.out.println("Time: "+t);
+}
+}
+
+
+Output-
+Date: 2022-03-07
+Time: 15:16:05.453294500
+
+
+Example 6-
+package Assign19;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
+public class Example5 {
+public static void main(String[] args) {
+	LocalDate d = LocalDate.now();
+	System.out.println("Date: "+d);
+	int dd=d.getDayOfMonth();
+	int mm=d.getMonthValue();
+	int yy=d.getYear();
+	System.out.println(dd+" "+mm+" "+yy);
+	System.out.printf("%d-%d-%d",dd,mm,yy);
+	System.out.println("\n");
+	
+	LocalTime t = LocalTime.now();
+	System.out.println("Time: "+t);
+	int h = t.getHour();
+	int m = t.getMinute();
+	int s = t.getSecond();
+	int n= t.getNano();
+	System.out.println(h+" "+m+" "+s+" "+n);
+	System.out.printf("%d-%d-%d-%d",h,m,s,n);
+	System.out.println("\n");
+	
+	LocalDateTime dt = LocalDateTime.now();
+	System.out.println(dt);
+	System.out.println("\n");
+	
+	LocalDateTime dt1=LocalDateTime.of(yy, mm, dd, h, m, s,n);
+	System.out.println(dt1);
+	System.out.println("After six months: "+dt1.plusMonths(6));
+	System.out.println("Before six months: "+dt1.minusMonths(6));
+	
+}
+}
+
+Output-
+Date: 2022-03-07
+7 3 2022
+7-3-2022
+
+Time: 15:40:07.402353200
+15 40 7 402353200
+15-40-7-402353200
+
+2022-03-07T15:40:07.402353200
+
+
+2022-03-07T15:40:07.402353200
+After six months: 2022-09-07T15:40:07.402353200
+Before six months: 2021-09-07T15:40:07.402353200
+
+Example 7-  (leap year)
+
+package Assign19;
+
+import java.time.Year;
+import java.util.Scanner;
+
+public class Example7 {
+public static void main(String[] args) {
+	Scanner sc=new Scanner(System.in);
+	System.out.println("Enter year: ");
+	int n = sc.nextInt();
+	
+	Year y = Year.of(n);
+	
+	if(y.isLeap()) {
+		System.out.printf("%d year is a leap year",n);
+	}
+	else {
+		System.out.printf("%d year is not a leap year",n);
+	}
+}
+}
+
+
+Example 8-
+package Assign19;
+
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+
+public class Example8 {
+public static void main(String[] args) {
+	ZoneId z=ZoneId.systemDefault();
+	System.out.println(z);
+	System.out.println("\n");
+	
+	ZoneId id=ZoneId.of("Asia/Singapore");
+	ZonedDateTime dt=ZonedDateTime.now(id);
+	System.out.println(dt);
+}
+}
+
