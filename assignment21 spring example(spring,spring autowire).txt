@@ -1,0 +1,258 @@
+1.Spring Demo Example-
+===================
+Employee.java-
+---------------
+package com.ia.Spring;
+
+public class Employee {
+		private int id;
+		private String name;
+		private int sal;
+		private String add;
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public int getSal() {
+			return sal;
+		}
+		public void setSal(int sal) {
+			this.sal = sal;
+		}
+		public String getAdd() {
+			return add;
+		}
+		public void setAdd(String add) {
+			this.add = add;
+		}
+		@Override
+		public String toString() {
+			return "Employee [id=" + id + ", name=" + name + ", sal=" + sal + ", add=" + add + "]";
+		}
+		public Employee(int id, String name, int sal, String add) {
+			super();
+			this.id = id;
+			this.name = name;
+			this.sal = sal;
+			this.add = add;
+		}
+		
+		public Employee() {
+			// TODO Auto-generated constructor stub
+		}
+}
+
+Test.java-
+----------
+package com.ia.Spring;
+
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+
+public class Test {
+public static void main(String[] args) {
+	Resource resource=new ClassPathResource("springConfig.xml");
+	BeanFactory factory=new XmlBeanFactory(resource);
+	
+	Employee e=(Employee) factory.getBean("anmol");
+	System.out.println(e);
+}
+}
+
+springConfig.xml-
+-----------------
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<context:annotation-config></context:annotation-config>
+
+<bean class="com.ia.Spring.Employee" id="anmol">   
+<property name="id" value="1"> </property>
+<property name="name" value="Anmol"> </property>
+<property name="sal" value="10000"> </property>
+<property name="add" value="jpr"> </property>
+</bean>
+
+
+</beans>
+
+output-
+--------
+Mar 11, 2022 10:37:58 AM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [springConfig.xml]
+Employee [id=1, name=Anmol, sal=10000, add=jpr]
+
+2.Spring autowire example-
+----------------------------
+Address.java-
+--------------
+package com.Spring1;
+
+public class Address {
+	private int houseno;
+	private String Housename;
+	private int housepincode;
+	private String houselandmark;
+	public int getHouseno() {
+		return houseno;
+	}
+	public void setHouseno(int houseno) {
+		this.houseno = houseno;
+	}
+	public String getHousename() {
+		return Housename;
+	}
+	public void setHousename(String housename) {
+		Housename = housename;
+	}
+	public int getHousepincode() {
+		return housepincode;
+	}
+	public void setHousepincode(int housepincode) {
+		this.housepincode = housepincode;
+	}
+	public String getHouselandmark() {
+		return houselandmark;
+	}
+	public void setHouselandmark(String houselandmark) {
+		this.houselandmark = houselandmark;
+	}
+	@Override
+	public String toString() {
+		return "Address [houseno=" + houseno + ", Housename=" + Housename + ", housepincode=" + housepincode
+				+ ", houselandmark=" + houselandmark + "]";
+	}
+	public Address(int houseno, String housename, int housepincode, String houselandmark) {
+		super();
+		this.houseno = houseno;
+		Housename = housename;
+		this.housepincode = housepincode;
+		this.houselandmark = houselandmark;
+	}
+	
+	public Address() {
+		// TODO Auto-generated constructor stub
+	}
+}
+
+Employee.java-
+--------------
+package com.Spring1;
+
+public class Employee {
+       private int id;
+       private String name;
+       private int sal;
+       Address address;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getSal() {
+		return sal;
+	}
+	public void setSal(int sal) {
+		this.sal = sal;
+	}
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", sal=" + sal + ", adrs=" + address + "]";
+	}
+	public Employee(int id, String name, int sal, Address address) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.sal = sal;
+		this.address = address;
+	}
+       
+       public Employee() {
+		// TODO Auto-generated constructor stub
+	}
+}
+
+Test.java-
+-----------
+package com.Spring1;
+
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+
+public class Test {
+  public static void main(String[] args) {
+	Resource resource = new ClassPathResource("springConfig.xml");
+	BeanFactory factory = new XmlBeanFactory(resource);
+	
+	Employee e=(Employee) factory.getBean("anmol1");
+	System.out.println(e);
+}
+}
+
+springConfig.xml-
+-----------------
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<context:annotation-config></context:annotation-config>
+
+<bean class="com.Spring1.Employee" id="anmol1"  autowire="byType">   
+<property name="id" value="1"> </property>
+<property name="name" value="Anmol"> </property>
+<property name="sal" value="10000"> </property>
+
+<property name ="Address" ref="anmol2"></property>
+</bean>
+
+<bean class="com.Spring1.Address" id="anmol2">   
+<property name="houseno" value="100"> </property>
+<property name="housename" value="Anmol123"> </property>
+<property name="housepincode" value="098765"> </property>
+<property name="houselandmark" value="near murlipura"> </property>
+</bean>
+
+
+</beans>
+
+output-
+---------
+Mar 11, 2022 5:07:02 PM org.springframework.beans.factory.xml.XmlBeanDefinitionReader loadBeanDefinitions
+INFO: Loading XML bean definitions from class path resource [springConfig.xml]
+Employee [id=1, name=Anmol, sal=10000, adrs=Address [houseno=100, Housename=Anmol123, housepincode=98765, houselandmark=near murlipura]]
