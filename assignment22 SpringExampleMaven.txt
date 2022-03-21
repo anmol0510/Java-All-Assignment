@@ -1,0 +1,379 @@
+14/03/2022-
+-----------
+
+example 1-(Normal)
+employee.java-
+--------------
+package com.springcore.SpringExample;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class Employee {
+		private int id;
+		private String name;
+		private int sal;
+		@Autowired
+		Address address;
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public int getSal() {
+			return sal;
+		}
+		public void setSal(int sal) {
+			this.sal = sal;
+		}
+
+		public Address getAddress() {
+			return address;
+		}
+		
+		public void setAddress(Address address) {
+			this.address = address;
+		}
+		
+		@Override
+		public String toString() {
+			return "Employee [id=" + id + ", name=" + name + ", sal=" + sal + ", address=" + address + "]";
+		}
+		public Employee(int id, String name, int sal, Address address) {
+			super();
+			this.id = id;
+			this.name = name;
+			this.sal = sal;
+			this.address = address;
+		}
+		
+		public Employee() {
+			// TODO Auto-generated constructor stub
+		}
+}
+
+test.java-
+-----------
+package com.springcore.SpringExample;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+
+public class Test {
+	public static void main(String[] args) {
+		  ApplicationContext factory = new AnnotationConfigApplicationContext(AppConfig.class);
+		  Employee e =(Employee) factory.getBean("anmol");
+		  e.setId(10);
+		  e.setName("Yajatiya");
+		  e.setSal(50);
+		  
+		  Address a = (Address) factory.getBean("add");
+		  a.setHname("SP House");
+		  a.setHno(10000);
+		  a.setHstate("Delhi");
+		  System.out.println(e);
+		  
+		  
+////		  Address a =(Address) factory.getBean("add");
+////		  System.out.println(a);
+//		  
+	}
+		
+}
+
+address.java-
+-------------
+package com.springcore.SpringExample;
+
+public class Address {
+		private int hno;
+		private String hname;
+		private String hstate;
+		public int getHno() {
+			return hno;
+		}
+		public void setHno(int hno) {
+			this.hno = hno;
+		}
+		public String getHname() {
+			return hname;
+		}
+		public void setHname(String hname) {
+			this.hname = hname;
+		}
+		public String getHstate() {
+			return hstate;
+		}
+		public void setHstate(String hstate) {
+			this.hstate = hstate;
+		}
+		@Override
+		public String toString() {
+			return "Address [hno=" + hno + ", hname=" + hname + ", hstate=" + hstate + "]";
+		}
+		public Address(int hno, String hname, String hstate) {
+			super();
+			this.hno = hno;
+			this.hname = hname;
+			this.hstate = hstate;
+		}
+		
+		public Address() {
+			// TODO Auto-generated constructor stub
+		}
+}
+
+appconfig.java-
+---------------
+package com.springcore.SpringExample;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration 
+public class AppConfig {
+   @Bean("anmol")
+   public Employee getEmployee() {
+	   Employee e = new Employee();
+	   return e;
+   }
+	   @Bean("add")
+	   public Address getAddress() {
+		   Address a = new Address();
+		   return a;
+   }
+   
+}
+
+pom.xml-
+----------
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.springcore</groupId>
+  <artifactId>SpringExample</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>SpringExample</name>
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+   <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.2.5</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+    <version>5.2.9.RELEASE</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>5.2.9.RELEASE</version>
+</dependency>
+
+
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M5</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+
+
+Example 2-
+-----------
+using annotations components,scope...
+
+employee.java-
+--------------
+package com.springcore.SpringExample;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+@Component
+@Scope("prototype")
+public class Employee {
+		private int id;
+		private String name;
+		private int sal;
+		@Autowired
+		Address address;
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public int getSal() {
+			return sal;
+		}
+		public void setSal(int sal) {
+			this.sal = sal;
+		}
+
+		public Address getAddress() {
+			return address;
+		}
+		
+		public void setAddress(Address address) {
+			this.address = address;
+		}
+		
+		@Override
+		public String toString() {
+			return "Employee [id=" + id + ", name=" + name + ", sal=" + sal + ", address=" + address + "]";
+		}
+		public Employee(int id, String name, int sal, Address address) {
+			super();
+			this.id = id;
+			this.name = name;
+			this.sal = sal;
+			this.address = address;
+		}
+		
+		public Employee() {
+			// TODO Auto-generated constructor stub
+		}
+}
+
+test.java-
+----------
+package com.springcore.SpringExample;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+
+public class Test {
+	public static void main(String[] args) {
+		  ApplicationContext factory = new AnnotationConfigApplicationContext(AppConfig.class);
+		  Employee e =(Employee) factory.getBean("employee");
+		  Employee e1=(Employee) factory.getBean("employee");
+		  e.setId(10);
+		  e.setName("Anmol");
+		  e.setSal(50);
+		  
+		  Address a = (Address) factory.getBean("address");
+		  a.setHname("SP House");
+		  a.setHno(10000);
+		  a.setHstate("Delhi");
+		  e.setAddress(a);
+		  System.out.println(e);
+		  System.out.println(e1);
+		  
+		  
+////		  Address a =(Address) factory.getBean("add");
+////		  System.out.println(a);
+//		  
+	}
+		
+}
+
+address.java-
+-------------
+package com.springcore.SpringExample;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Component
+@Scope("prototype")
+public class Address {
+		private int hno;
+		private String hname;
+		private String hstate;
+		public int getHno() {
+			return hno;
+		}
+		public void setHno(int hno) {
+			this.hno = hno;
+		}
+		public String getHname() {
+			return hname;
+		}
+		public void setHname(String hname) {
+			this.hname = hname;
+		}
+		public String getHstate() {
+			return hstate;
+		}
+		public void setHstate(String hstate) {
+			this.hstate = hstate;
+		}
+		@Override
+		public String toString() {
+			return "Address [hno=" + hno + ", hname=" + hname + ", hstate=" + hstate + "]";
+		}
+		public Address(int hno, String hname, String hstate) {
+			super();
+			this.hno = hno;
+			this.hname = hname;
+			this.hstate = hstate;
+		}
+		
+		public Address() {
+			// TODO Auto-generated constructor stub
+		}
+}
+
+appconfig.java-
+---------------
+package com.springcore.SpringExample;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ComponentScan("com.springcore.SpringExample")
+public class AppConfig {
+//   @Bean("anmol")
+//   public Employee getEmployee() {
+//	   Employee e = new Employee();
+//	   return e;
+//   }
+//	   @Bean("add")
+//	   public Address getAddress() {
+//		   Address a = new Address();
+//		   return a;
+//   }
+   
+}
