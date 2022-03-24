@@ -1,0 +1,321 @@
+Sample Example 1-
+----------------
+src/main/java-
+--------------
+
+-com.ia-
+========
+SpringBootDemoApplication.java-
+-------------------------------
+package com.ia;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class SpringBootDemoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringBootDemoApplication.class, args);
+		
+	
+	}
+
+	
+
+}
+
+
+-com.ia.dao-
+============
+-EmployeeDao.java-
+------------------
+package com.ia.dao;
+
+import java.util.List;
+
+import com.ia.entity.Employee;
+
+public interface EmployeeDao {
+	Employee addEmployee(Employee employee);
+	Employee updateEmployee(Employee employee);
+	String deleteEmployee(int empId);
+	Employee getEmployee(int empId);
+	List<Employee> getAllEmployees();
+}
+
+-employeeDaoImpl.java-
+----------------------
+package com.ia.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
+import org.springframework.stereotype.Repository;
+
+import com.ia.entity.Employee;
+
+@Repository
+public class EmployeeDaoImpl implements EmployeeDao{
+	
+	@PersistenceContext
+	EntityManager entity;
+	@Override
+	public Employee addEmployee(Employee employee) {
+		// TODO Auto-generated method stub
+		entity.persist(employee);
+		return entity.find(Employee.class, employee.getEmpId());
+	}
+
+	@Override
+	public Employee updateEmployee(Employee employee) {
+		// TODO Auto-generated method stub
+		return entity.merge(employee);
+	}
+
+	@Override
+	public String deleteEmployee(int empId) {
+		// TODO Auto-generated method stub
+		Employee emp=entity.find(Employee.class, empId);
+		if(emp!=null) {
+			entity.remove(emp);
+			return "Employee Deleted";
+		}
+		else {
+			return "No Employee found";
+		}
+	}
+
+	@Override
+	public Employee getEmployee(int empId) {
+		// TODO Auto-generated method stub
+		return entity.find(Employee.class, empId);
+	}
+
+	@Override
+	public List<Employee> getAllEmployees() {
+		// TODO Auto-generated method stub
+		TypedQuery<Employee> r=entity.createQuery("Select e from Employee e",Employee.class);
+		return r.getResultList();
+	}
+
+}
+
+-com.ia.entity-
+===============
+-Employee.java-
+---------------
+package com.ia.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="springemployee")
+public class Employee {
+		@Id
+		private int empId;
+		private String empName;
+		private int empSal;
+		private String empAdd;
+		public int getEmpId() {
+			return empId;
+		}
+		public void setEmpId(int empId) {
+			this.empId = empId;
+		}
+		public String getEmpName() {
+			return empName;
+		}
+		public void setEmpName(String empName) {
+			this.empName = empName;
+		}
+		public int getEmpSal() {
+			return empSal;
+		}
+		public void setEmpSal(int empSal) {
+			this.empSal = empSal;
+		}
+		public String getEmpAdd() {
+			return empAdd;
+		}
+		public void setEmpAdd(String empAdd) {
+			this.empAdd = empAdd;
+		}
+		
+		
+		public Employee() {
+			// TODO Auto-generated constructor stub
+		}
+		@Override
+		public String toString() {
+			return "Employee [empId=" + empId + ", empName=" + empName + ", empSal=" + empSal + ", empAdd=" + empAdd
+					+ "]";
+		}
+		public Employee(int empId, String empName, int empSal, String empAdd) {
+			super();
+			this.empId = empId;
+			this.empName = empName;
+			this.empSal = empSal;
+			this.empAdd = empAdd;
+		}
+		
+		
+}
+
+
+-com.ia.service-
+================
+-EmployeeService.java-
+---------------------
+package com.ia.service;
+
+import java.util.List;
+
+import com.ia.entity.Employee;
+
+public interface EmployeeService {
+		 Employee addEmployee(Employee employee);
+		Employee updateEmployee(Employee employee);
+		String deleteEmployee(int empId);
+		Employee getEmployee(int empId);
+		List<Employee> getAllEmployees();
+}
+
+-EmployeeServiceImpl.java-
+--------------------------
+package com.ia.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.ia.dao.EmployeeDao;
+import com.ia.entity.Employee;
+
+
+@Service
+@Transactional
+public class EmployeeServiceImpl implements EmployeeService {
+	@Autowired
+	EmployeeDao dao;
+	@Override
+	public Employee addEmployee(Employee employee) {
+		// TODO Auto-generated method stub
+		return dao.addEmployee(employee);
+	}
+
+	@Override
+	public Employee updateEmployee(Employee employee) {
+		// TODO Auto-generated method stub
+		return dao.updateEmployee(employee);
+	}
+
+	@Override
+	public String deleteEmployee(int empId) {
+		// TODO Auto-generated method stub
+		return dao.deleteEmployee(empId);
+	}
+
+	@Override
+	public Employee getEmployee(int empId) {
+		// TODO Auto-generated method stub
+		return dao.getEmployee(empId);
+	}
+
+	@Override
+	public List<Employee> getAllEmployees() {
+		// TODO Auto-generated method stub
+		return dao.getAllEmployees();
+	}
+
+}
+
+
+
+-application.properties-
+========================
+server.port=1700
+spring.datasource.url=jdbc:postgresql://localhost:5432/one
+spring.datasource.username=postgres
+spring.datasource.password=12345@
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+
+
+
+src/test/java-
+--------------
+
+-com.ia-
+========
+-SpringBootDemoApplicationTests.java-
+-------------------------------------
+package com.ia;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.ia.entity.Employee;
+import com.ia.service.EmployeeService;
+
+@SpringBootTest
+class SpringBootDemoApplicationTests {
+	@Autowired
+	EmployeeService service;
+//	@Test
+//	void testAddEmployee() {
+//		Employee employee= new Employee(1,"Anmol",10000000,"Jaipur");
+//		Employee employee1=new Employee(2,"Khatod",1000,"Rajasthan");
+//		Employee emp=service.addEmployee(employee);
+//		Employee emp1=service.addEmployee(employee1);
+//		assertEquals(emp.getEmpName(),"Anmol");
+//		assertEquals(emp1.getEmpName(),"Khatod");
+//	}
+//	
+//	@Test
+//	void testupdateEmployee() {
+//		Employee employee= new Employee(1,"AnmolKhatod",10000000,"Jaipur");
+//		Employee emp=service.updateEmployee(employee);
+//		assertEquals(emp.getEmpName(),"AnmolKhatod");
+//		Employee employee1=new Employee(2,"KhatodJi",1000,"Rajasthan");
+//		Employee emp1=service.updateEmployee(employee1);
+//		assertEquals(emp1.getEmpName(),"KhatodJi");
+//	}
+	
+//	@Test
+//	void testgetEmployees() {
+//		Employee emp=service.getEmployee(1);
+//		assertEquals(emp.getEmpName(),"AnmolKhatod");
+//		System.out.println(emp.toString());
+//	}
+
+//	@Test
+//	void testdeleteEmployee() {
+//		String emp = service.deleteEmployee(2);
+//		assertEquals(emp,"Employee Deleted");
+//		
+//	}
+	
+	@Test
+	void testgetAllEmployee() {
+		List<Employee> employee=service.getAllEmployees();
+		assertEquals(employee.size(),1);
+		System.out.println(employee.toString());
+	}
+
+}
