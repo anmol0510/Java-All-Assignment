@@ -1,0 +1,593 @@
+24-03-2022=
+===========
+Example1(Employee)-
+===================
+src/main/java-
+==============
+-com.dj-
+========
+-SpringBootDataJpaDemoApplication.java-
+----------------------------------------
+package com.dj;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class SpringBootDataJpaDemoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringBootDataJpaDemoApplication.class, args);
+	}
+
+}
+
+
+-com.dj.controller-
+==================
+-EmployeeController.java-
+-------------------------
+package com.dj.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.dj.entity.Employee;
+import com.dj.service.EmployeeService;
+
+@RestController
+@RequestMapping("/employee")  //http://localhost:0604/employee
+public class EmployeeController {
+	@Autowired
+	EmployeeService service;
+	
+	//post-insert ,get-get,put-update,delete-remove
+	@PostMapping("/addEmployee")  //http://localhost:0604/employee/addEmployee
+	public Employee addEmployee(@RequestBody Employee emp) {
+		return service.addEmployee(emp);	
+}
+	@PutMapping("/updateEmployee")//http://localhost:0604/employee/updateEmployee
+	public Employee updateEmployee(@RequestBody Employee emp) {
+		return service.updateEmployee(emp);	
+}
+	@GetMapping("/getEmployee/{eid}")//http://localhost:0604/employee/getEmployee/eid
+	public Optional<Employee> getEmployee(@PathVariable("eid") int empId) {
+		return service.getEmployee(empId);	
+}
+	@GetMapping("/getAllEmployees")//http://localhost:0604/employee/getAllEmployees
+	public Iterable<Employee> getAllEmployee() {
+		return service.getAllEmployees();	
+}
+	@DeleteMapping("/deleteEmployee/{eid}")//http://localhost:0604/employee/deleteEmployee/eid
+	public void deleteEmployee(@PathVariable("eid") int empId) {
+		service.deleteEmployee(empId);	
+}
+}
+
+-com.dj.dao-
+============
+-EmployeeDao.java-
+------------------
+package com.dj.dao;
+
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.dj.entity.Employee;
+
+public interface EmployeeDao extends CrudRepository<Employee, Integer>{
+		
+}
+
+
+-com.dj.entity-
+================
+-Employee.java-
+---------------
+package com.dj.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="sbdataemp")
+public class Employee {
+		@Id
+		private int empId;
+		private String empName;
+		private int empSal;
+		private String empAdd;
+		public int getEmpId() {
+			return empId;
+		}
+		public void setEmpId(int empId) {
+			this.empId = empId;
+		}
+		public String getEmpName() {
+			return empName;
+		}
+		public void setEmpName(String empName) {
+			this.empName = empName;
+		}
+		public int getEmpSal() {
+			return empSal;
+		}
+		public void setEmpSal(int empSal) {
+			this.empSal = empSal;
+		}
+		public String getEmpAdd() {
+			return empAdd;
+		}
+		public void setEmpAdd(String empAdd) {
+			this.empAdd = empAdd;
+		}
+		
+		
+		public Employee() {
+			// TODO Auto-generated constructor stub
+		}
+		@Override
+		public String toString() {
+			return "Employee [empId=" + empId + ", empName=" + empName + ", empSal=" + empSal + ", empAdd=" + empAdd
+					+ "]";
+		}
+		public Employee(int empId, String empName, int empSal, String empAdd) {
+			super();
+			this.empId = empId;
+			this.empName = empName;
+			this.empSal = empSal;
+			this.empAdd = empAdd;
+		}
+		
+		
+}
+
+
+-com.dj.service-
+================
+-EmployeeService.java-
+----------------------
+package com.dj.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.dj.entity.Employee;
+
+public interface EmployeeService {
+	 Employee addEmployee(Employee employee);
+		Employee updateEmployee(Employee employee);
+		void deleteEmployee(int empId);
+		Optional<Employee> getEmployee(int empId);
+		Iterable<Employee> getAllEmployees();
+}
+
+-EmployeeServiceImpl.java-
+--------------------------
+package com.dj.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.dj.dao.EmployeeDao;
+import com.dj.entity.Employee;
+@Service
+@Transactional
+public class EmployeeServiceImpl implements EmployeeService {
+	@Autowired
+	EmployeeDao dao;
+	@Override
+	public Employee addEmployee(Employee employee) {
+		// TODO Auto-generated method stub
+		return dao.save(employee);
+	}
+
+	@Override
+	public Employee updateEmployee(Employee employee) {
+		// TODO Auto-generated method stub
+		return dao.save(employee);
+	}
+
+	@Override
+	public void deleteEmployee(int empId) {
+		// TODO Auto-generated method stub
+		dao.deleteById(empId);
+	}
+
+	@Override
+	public Optional<Employee> getEmployee(int empId) {
+		// TODO Auto-generated method stub
+		return dao.findById(empId);
+	}
+
+	@Override
+	public Iterable<Employee> getAllEmployees() {
+		// TODO Auto-generated method stub
+		return dao.findAll();
+	}
+
+}
+
+
+-application.properties-
+========================
+server.port=0604
+spring.datasource.url=jdbc:postgresql://localhost:5432/one
+spring.datasource.username=postgres
+spring.datasource.password=12345@
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+
+
+
+
+Output-
+=======
+postgres=# \c one;
+You are now connected to database "one" as user "postgres".
+one=# \dt;
+              List of relations
+ Schema |      Name       | Type  |  Owner
+--------+-----------------+-------+----------
+ public | elayered        | table | postgres
+ public | emp             | table | postgres
+ public | empjpql         | table | postgres
+ public | employee        | table | postgres
+ public | emptable        | table | postgres
+ public | jparestemp      | table | postgres
+ public | jparestemployee | table | postgres
+ public | pizza           | table | postgres
+ public | sbdataemp       | table | postgres
+ public | springemployee  | table | postgres
+ public | traineejparest  | table | postgres
+(11 rows)
+
+
+one=# select * from sbdataemp;
+ emp_id | emp_add | emp_name | emp_sal
+--------+---------+----------+---------
+(0 rows)
+
+
+one=# select * from sbdataemp;                   //inserting values
+ emp_id | emp_add | emp_name | emp_sal
+--------+---------+----------+---------
+      1 | Jaipur  | Anmol    |   10000
+(1 row)
+
+
+one=# select * from sbdataemp;
+ emp_id | emp_add | emp_name | emp_sal
+--------+---------+----------+---------
+      1 | Jaipur  | Anmol    |   10000
+      2 | Punjab  | Piyush   |      10
+(2 rows)
+
+
+one=# select * from sbdataemp;
+ emp_id |  emp_add  | emp_name | emp_sal
+--------+-----------+----------+---------
+      1 | Jaipur    | Anmol    |   10000
+      2 | Punjab    | Piyush   |      10
+      3 | Rajasthan | Yajat    |     121
+(3 rows)
+
+
+one=# select * from sbdataemp;                  //updating values
+ emp_id | emp_add |  emp_name  | emp_sal
+--------+---------+------------+---------
+      1 | Jaipur  | Anmol      |   10000
+      2 | Punjab  | Piyush     |      10
+      3 | Ajmer   | YajatDhand |    1500
+(3 rows)
+
+
+one=# select * from sbdataemp;
+ emp_id | emp_add |  emp_name  | emp_sal       //delete value
+--------+---------+------------+---------
+      1 | Jaipur  | Anmol      |   10000
+      3 | Ajmer   | YajatDhand |    1500
+(2 rows)
+
+Example2(customer)-
+===================
+src/main/java-
+==============
+-com.cd-
+========
+-SpringBootDataJpaCustomerApplication.java-
+-------------------------------------------
+package com.cd;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class SpringBootDataJpaCustomerApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringBootDataJpaCustomerApplication.class, args);
+	}
+
+}
+
+
+-com.cd.controller-
+===================
+-Controller.java-
+-----------------
+package com.cd.controller; 
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cd.entity.Customer;
+import com.cd.service.CustomerService;
+
+@RestController
+@RequestMapping("/customer")             // http://localhost:2825/customer
+public class Controller {
+		@Autowired
+		CustomerService service;
+		
+		@PostMapping("/addCustomer")     // http://localhost:2825/customer/addCustomer 
+		public Customer addCustomer(@RequestBody Customer cst) {
+			return service.addCustomer(cst);
+			
+		}
+		
+		@PutMapping("/updateCustomer")     // http://localhost:2825/customer/updateCustomer 
+		public Customer updateCustomer(@RequestBody Customer cst) {
+			return service.updateCustomer(cst);
+			
+		}
+		
+		@GetMapping("/getCustomer/{cno}")   // http://localhost:2825/customer/getCustomer/cno
+		public Optional<Customer> getCustomer(@PathVariable("cno") int cNo ) {
+			return service.getCustomer(cNo);
+			
+		}
+		
+		@GetMapping("/getAllCustomers")     //http://localhost:2825/customer/getAllCustomers
+		public Iterable<Customer> getAllCustomers(){
+			return service.getAllCustomers();
+		}
+		
+		@DeleteMapping("/deleteCustomer/{cno}")   // http://localhost:2825/customer/deleteCustomer/cno
+		public void deleteCustomer(@PathVariable("cno") int cNo ) {
+			service.deleteCustomer(cNo);
+			
+		}
+		
+}
+
+
+-com.cd.dao-
+============
+-CustomerDao.java-
+------------------
+package com.cd.dao;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.cd.entity.Customer;
+
+public interface CustomerDao extends CrudRepository<Customer, Integer>{
+		
+}
+
+
+=com.cd.entity-
+===============
+-Customer.java-
+---------------
+package com.cd.entity;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="springcustomer")
+public class Customer {
+		@Id
+		private int cNo;
+		private String cName;
+		private int cPinCode;
+		private String cAdd;
+		public int getcNo() {
+			return cNo;
+		}
+		public void setcNo(int cNo) {
+			this.cNo = cNo;
+		}
+		public String getcName() {
+			return cName;
+		}
+		public void setcName(String cName) {
+			this.cName = cName;
+		}
+		public int getcPinCode() {
+			return cPinCode;
+		}
+		public void setcPinCode(int cPinCode) {
+			this.cPinCode = cPinCode;
+		}
+		public String getcAdd() {
+			return cAdd;
+		}
+		public void setcAdd(String cAdd) {
+			this.cAdd = cAdd;
+		}
+		@Override
+		public String toString() {
+			return "Customer [cNo=" + cNo + ", cName=" + cName + ", cPinCode=" + cPinCode + ", cAdd=" + cAdd + "]";
+		}
+		public Customer(int cNo, String cName, int cPinCode, String cAdd) {
+			super();
+			this.cNo = cNo;
+			this.cName = cName;
+			this.cPinCode = cPinCode;
+			this.cAdd = cAdd;
+		}
+		
+		public Customer() {
+			// TODO Auto-generated constructor stub
+		}
+}
+
+=com.cd.service-
+================
+-CustomerService.java-
+----------------------
+package com.cd.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.cd.entity.Customer;
+
+public interface CustomerService {
+		Customer addCustomer(Customer cst);
+		Customer updateCustomer(Customer cst);
+		void deleteCustomer(int cNo);
+		Optional<Customer> getCustomer(int cNo);
+		Iterable<Customer> getAllCustomers();
+}
+
+
+-CustomerServiceImpl.java-
+--------------------------
+package com.cd.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.cd.dao.CustomerDao;
+import com.cd.entity.Customer;
+
+@Service
+@Transactional
+public class CustomerServiceImpl implements CustomerService {
+	@Autowired
+	CustomerDao dao;
+	@Override
+	public Customer addCustomer(Customer cst) {
+		// TODO Auto-generated method stub
+		return dao.save(cst);
+	}
+
+	@Override
+	public Customer updateCustomer(Customer cst) {
+		// TODO Auto-generated method stub
+		return dao.save(cst);
+	}
+
+	@Override
+	public void deleteCustomer(int cNo) {
+		// TODO Auto-generated method stub
+		dao.deleteById(cNo);
+	}
+
+	@Override
+	public Optional<Customer> getCustomer(int cNo) {
+		// TODO Auto-generated method stub
+		return dao.findById(cNo);
+	}
+
+	@Override
+	public Iterable<Customer> getAllCustomers() {
+		// TODO Auto-generated method stub
+		return dao.findAll();
+	}
+
+}
+
+
+-application.properties-
+========================
+server.port=2825
+spring.datasource.url=jdbc:postgresql://localhost:5432/one
+spring.datasource.username=postgres
+spring.datasource.password=12345@
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+Output-
+=======
+one=# select * from springcustomer;
+ c_no | c_add  | c_name | c_pin_code                 //inserting values
+------+--------+--------+------------
+  100 | Jaipur | Anmol  |       4444
+(1 row)
+
+
+one=# select * from springcustomer;
+ c_no |   c_add   | c_name | c_pin_code
+------+-----------+--------+------------
+  100 | Jaipur    | Anmol  |       4444
+  101 | Rajasthan | yajat  |       5555
+(2 rows)
+
+
+one=# select * from springcustomer;
+ c_no |   c_add   | c_name | c_pin_code
+------+-----------+--------+------------
+  100 | Jaipur    | Anmol  |       4444
+  101 | Rajasthan | yajat  |       5555
+  102 | Sikar     | Ajay   |       6666
+(3 rows)
+
+
+one=# select * from springcustomer;              //updating values
+ c_no |   c_add   | c_name | c_pin_code
+------+-----------+--------+------------
+  100 | Jaipur    | Anmol  |       4444
+  101 | Rajasthan | yajat  |       5555
+  102 | Sikkim    | Abhit  |       7777
+(3 rows)
+
+
+one=# select * from springcustomer;
+ c_no |   c_add   | c_name | c_pin_code
+------+-----------+--------+------------
+  100 | Jaipur    | Anmol  |       4444
+  101 | Rajasthan | yajat  |       5555
+  102 | Punjab    | Ayush  |       8888
+(3 rows)
+
+
